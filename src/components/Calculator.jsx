@@ -12,6 +12,10 @@ function Calculator()  {
 
     const ops = ['/', '*', '+', '-', '.'];
 
+    const calculateStr = (equation) => {
+        return new Function('return ' + equation)();
+    }
+
     const updateCalc = val => {
         if(
             (ops.includes(val) && calc==='') || 
@@ -21,12 +25,12 @@ function Calculator()  {
         }
         setCalc(calc+val);
         if(!ops.includes(val)){
-            setResult(eval(calc+val).toString());
+            setResult(calculateStr(calc+val).toString());
         }
     }
 
     const calculate = () => {
-        setCalc(eval(calc).toString());
+        setCalc(calculateStr(calc).toString());
     }
 
     const deleteLast = () => {
@@ -47,6 +51,7 @@ function Calculator()  {
 
     const clearScreen = () =>{
         setCalc('');
+        setResult('');
     }
 
     // render () {
